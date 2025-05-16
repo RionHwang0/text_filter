@@ -11,8 +11,14 @@ import FundManagers from '../components/FundManagers';
 import RedemptionProcedure from '../components/RedemptionProcedure';
 import TaxationGuide from '../components/TaxationGuide';
 import ReferenceLinks from '../components/ReferenceLinks';
-import AssetAllocation from '../components/AssetAllocation';
+import dynamic from 'next/dynamic';
 import { ProcessedDocument } from '../utils/fileProcessor';
+
+// 다이나믹 임포트로 SimpleAssetChart 로드
+const SimpleAssetChart = dynamic(() => import('../components/SimpleAssetChart'), { 
+  ssr: false,
+  loading: () => <div className="h-[400px] flex items-center justify-center">차트 로딩 중...</div>
+});
 
 const generateHashtags = (doc: ProcessedDocument) => {
   // 문서의 내용을 기반으로 해시태그 생성
@@ -141,7 +147,7 @@ const ResultPage: React.FC = () => {
 
   // 펀드 개요 데이터
   const fundOverviewData = {
-    name: '신한미국S&P500인덱스증권자투자신탁(H)[주식-파생형]',
+    name: '증권자투자신탁(H)[주식-파생형]',
     code: 'DT432',
     setupDate: '없음 (모집: 2023.05.08 예정, 존속기간: 무제한)',
     manager: '신한자산운용(주)',
@@ -208,7 +214,7 @@ const ResultPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Head>
-        <title>{document?.title || '문서 분석 결과'} - 텍스트 필터</title>
+        <title>미국 대표 500개 기업에 한 번에 투자하세요. - 텍스트 필터</title>
         <meta name="description" content="텍스트 필터로 생성된 가독성 높은 웹페이지" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -234,9 +240,9 @@ const ResultPage: React.FC = () => {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-toss-black mb-2">{document?.title || '신한미국S&P500인덱스증권자투자신탁(H)[주식-파생형]'}</h1>
+          <h1 className="text-2xl font-bold text-toss-black mb-2">미국 대표 500개 기업에 한 번에 투자하세요.</h1>
           <p className="text-toss-gray">
-            PDF 파일을 가독성 높은 웹페이지로 변환했습니다. 해시태그와 시각화를 통해 내용을 쉽게 파악하세요.
+            애플부터 아마존까지, S&P500 지수를 따라가는 글로벌 분산투자 펀드입니다.
           </p>
         </div>
 
@@ -247,7 +253,7 @@ const ResultPage: React.FC = () => {
         <FundOverview fund={fundOverviewData} />
         <InvestmentStrategy />
         <ReturnRates returnData={returnRateData} benchmarkReturn={benchmarkReturn} />
-        <AssetAllocation />
+        <SimpleAssetChart />
         <InvestmentCosts costs={costData} />
         <InvestmentRisks />
         <FundManagers managers={managerData} />

@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:clean": "rd /s /q export_build 2>nul || (exit 0) && next build",
+    "build:deploy": "next build && npx gh-pages -d export_build",
     "start": "next start",
     "lint": "next lint"
   },
