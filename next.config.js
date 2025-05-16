@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   output: 'export',  // 정적 파일로 export
-  distDir: 'out',   // 빌드 디렉토리 설정
+  distDir: 'build',   // 빌드 디렉토리 설정을 out에서 build로 변경
   images: {
     unoptimized: true, // 정적 내보내기에 필요
   },
