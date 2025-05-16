@@ -11,6 +11,7 @@ import FundManagers from '../components/FundManagers';
 import RedemptionProcedure from '../components/RedemptionProcedure';
 import TaxationGuide from '../components/TaxationGuide';
 import ReferenceLinks from '../components/ReferenceLinks';
+import AssetAllocation from '../components/AssetAllocation';
 import { ProcessedDocument } from '../utils/fileProcessor';
 
 const generateHashtags = (doc: ProcessedDocument) => {
@@ -246,6 +247,7 @@ const ResultPage: React.FC = () => {
         <FundOverview fund={fundOverviewData} />
         <InvestmentStrategy />
         <ReturnRates returnData={returnRateData} benchmarkReturn={benchmarkReturn} />
+        <AssetAllocation />
         <InvestmentCosts costs={costData} />
         <InvestmentRisks />
         <FundManagers managers={managerData} />
